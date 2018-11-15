@@ -4,4 +4,7 @@ go:
   - "1.11"
 
 script:
-  - go test -v ./...
+  - make ci_deps
+  - make test
+  - make goveralls
+  - make lint
