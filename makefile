@@ -7,7 +7,7 @@ ci_deps:
 	go get github.com/mattn/goveralls
 
 test:
-	go test -v ./... -covermode=count -coverprofile=profile.cov
+	go test -v ./... -covermode=count -coverprofile=profile.cov -bench=.
 
 goveralls:
 	goveralls -coverprofile=profile.cov -service=travis-ci
