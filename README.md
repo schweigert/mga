@@ -2,4 +2,10 @@
 [![Coverage Status](https://coveralls.io/repos/github/schweigert/mga/badge.svg?branch=master)](https://coveralls.io/github/schweigert/mga?branch=master)
 
 # mga
-Go Massive Game Architecture
+
+Go Massive Game Architecture.
+
+## Dev deps
+
+
+  - Dev deps: https://github.com/kardianos/govendor
