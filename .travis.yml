@@ -1,0 +1,10 @@
+language: go
+
+go:
+  - "1.11"
+
+script:
+  - make ci_deps
+  - make test
+  - make goveralls
+  - make lint
