@@ -30,3 +30,9 @@ lint:
 		--enable=vetshadow \
 		--deadline=10m \
 		./...
+
+build_rudy:
+	sudo docker-compose -f build/rudy-docker-compose.yml build
+
+rudy: build_rudy
+	sudo docker-compose -f build/rudy-docker-compose.yml up
