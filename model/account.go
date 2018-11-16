@@ -6,5 +6,5 @@ type Account struct {
 	Username string
 	Password string
 
-	Character Character
+	Characters []Character
 }

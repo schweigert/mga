@@ -20,11 +20,12 @@ func ShowAccountHandler(c *gin.Context) {
 	dbc := db.Connect()
 	defer db.SafeClose(dbc)
 
-	id := c.Param("id")
 	account := &model.Account{}
 
-	dbc.Where("id = ?", id).First(account)
-	c.JSON(200, account)
+	if c.BindJSON(account) == nil {
+		dbc.Where("id = ?", account.ID).First(account)
+		c.JSON(200, account)
+	}
 }
 
 func CreateAccountHandler(c *gin.Context) {
@@ -35,5 +36,27 @@ func CreateAccountHandler(c *gin.Context) {
 
 	if c.BindJSON(account) == nil {
 		c.JSON(200, dbc.Create(account))
+	}
+}
+
+func UpdateAccountHandler(c *gin.Context) {
+	dbc := db.Connect()
+	defer db.SafeClose(dbc)
+
+	account := &model.Account{}
+
+	if c.BindJSON(account) == nil {
+		c.JSON(200, dbc.Save(account))
+	}
+}
+
+func DestroyAccountHandler(c *gin.Context) {
+	dbc := db.Connect()
+	defer db.SafeClose(dbc)
+
+	account := &model.Account{}
+
+	if c.BindJSON(account) == nil {
+		c.JSON(200, dbc.Delete(account))
 	}
 }
