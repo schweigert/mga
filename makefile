@@ -7,7 +7,7 @@ ci_deps:
 	go get github.com/mattn/goveralls
 
 test:
-	go test -v ./... -covermode=count -coverprofile=profile.cov
+	go test -v ./... -covermode=count -coverprofile=profile.cov -bench=.
 
 goveralls:
 	goveralls -coverprofile=profile.cov -service=travis-ci
@@ -30,3 +30,9 @@ lint:
 		--enable=vetshadow \
 		--deadline=10m \
 		./...
+
+build_rudy:
+	sudo docker-compose -f build/rudy-docker-compose.yml build
+
+rudy: build_rudy
+	sudo docker-compose -f build/rudy-docker-compose.yml up
