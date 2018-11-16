@@ -11,9 +11,14 @@ var router *gin.Engine
 
 func init() {
 	log.Println("Starting rudydb...")
-	router = gin.Default()
+	// Database configuration
+	log.Println("db:migrate")
+	migrate()
 
-	Routes(router)
+	// Webserver configuration
+	log.Println("routes:add")
+	router = gin.Default()
+	routes(router)
 }
 
 func main() {
