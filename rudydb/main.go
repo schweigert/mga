@@ -17,5 +17,5 @@ func init() {
 }
 
 func main() {
-	router.Run(os.Getenv("ADDR"))
+	panic(router.Run(os.Getenv("ADDR")))
 }
