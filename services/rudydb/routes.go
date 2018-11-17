@@ -19,4 +19,10 @@ func routes(router *gin.Engine) {
 	router.POST("/character/create", handlers.CreateCharacterHandler)
 	router.POST("/character/update", handlers.UpdateCharacterHandler)
 	router.POST("/character/destroy", handlers.DestroyCharacterHandler)
+
+	router.GET("/items", handlers.IndexItemHandler)
+	router.POST("/item/show", handlers.ShowItemHandler)
+	router.POST("/item/create", handlers.CreateItemHandler)
+	router.POST("/item/update", handlers.UpdateItemHandler)
+	router.POST("/item/destroy", handlers.DestroyItemHandler)
 }
