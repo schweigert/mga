@@ -15,6 +15,8 @@ func routes(router *gin.Engine) {
 	router.POST("/account/destroy", handlers.DestroyAccountHandler)
 
 	router.GET("/characters", handlers.IndexCharacterHandler)
-	router.GET("/character/show/:id", handlers.ShowCharacterHandler)
+	router.POST("/character/show", handlers.ShowCharacterHandler)
 	router.POST("/character/create", handlers.CreateCharacterHandler)
+	router.POST("/character/update", handlers.UpdateCharacterHandler)
+	router.POST("/character/destroy", handlers.DestroyCharacterHandler)
 }

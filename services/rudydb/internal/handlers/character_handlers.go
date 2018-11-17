@@ -20,11 +20,12 @@ func ShowCharacterHandler(c *gin.Context) {
 	dbc := db.Connect()
 	defer db.SafeClose(dbc)
 
-	id := c.Param("id")
 	character := &model.Character{}
 
-	dbc.Where("id = ?", id).First(character)
-	c.JSON(200, character)
+	if c.BindJSON(character) == nil {
+		dbc.Where("id = ?", character.ID).First(character)
+		c.JSON(200, character)
+	}
 }
 
 func CreateCharacterHandler(c *gin.Context) {
@@ -35,5 +36,27 @@ func CreateCharacterHandler(c *gin.Context) {
 
 	if c.BindJSON(character) == nil {
 		c.JSON(200, dbc.Create(character))
+	}
+}
+
+func UpdateCharacterHandler(c *gin.Context) {
+	dbc := db.Connect()
+	defer db.SafeClose(dbc)
+
+	character := &model.Character{}
+
+	if c.BindJSON(character) == nil {
+		c.JSON(200, dbc.Save(character))
+	}
+}
+
+func DestroyCharacterHandler(c *gin.Context) {
+	dbc := db.Connect()
+	defer db.SafeClose(dbc)
+
+	character := &model.Character{}
+
+	if c.BindJSON(character) == nil {
+		c.JSON(200, dbc.Delete(character))
 	}
 }
