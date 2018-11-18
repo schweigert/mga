@@ -24,7 +24,7 @@ services:
     environment:
       - ADDR=0.0.0.0:80
       - GIN_MODE=debug
-      - RUDYDB=rudydb
+      - RUDYDB_ADDR=http://rudydb
     ports:
       - 3000:80
     depends_on:

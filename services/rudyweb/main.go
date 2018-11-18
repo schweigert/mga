@@ -12,6 +12,7 @@ var router *gin.Engine
 func init() {
 	log.Println("Starting rudyweb...")
 	router = gin.Default()
+	routes(router)
 }
 
 func main() {

@@ -12,7 +12,7 @@ func IndexAccountHandler(c *gin.Context) {
 
 	accounts := &[]model.Account{}
 
-	dbc.Find(accounts)
+	dbc.Preload("Characters").Find(accounts)
 	c.JSON(200, accounts)
 }
 
