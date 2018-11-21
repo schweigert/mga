@@ -3,6 +3,15 @@ language: go
 go:
   - "1.11"
 
+services:
+  - postgresql
+
+env:
+  - DB_CONFIG=host=postgres port=5432 user=postgres sslmode=disable dbname=travis_ci_test
+
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+
 script:
   - make ci_deps
   - make test
