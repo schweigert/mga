@@ -38,6 +38,10 @@ func init() {
 	initRudywebUrl()
 }
 
+func steps() {
+	createAccount()
+}
+
 func main() {
 	log.Println("Starting Rudy Client...")
 	log.Println("Username:", USER_ACCOUNT.Username)
@@ -45,5 +49,5 @@ func main() {
 
 	log.Println("Rudyweb URL:", RUDYWEB_URL)
 
-	createAccount()
+	steps()
 }
