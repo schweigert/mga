@@ -2,6 +2,14 @@ version: '3'
 
 services:
 
+  rudyc:
+    build:
+      context: ../.
+      dockerfile: build/rudyc/Dockerfile
+    command: rudyc
+    depends_on:
+      - rudyweb
+
   rudydb:
     build:
       context: ../.
