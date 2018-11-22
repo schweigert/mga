@@ -7,6 +7,8 @@ services:
       context: ../.
       dockerfile: build/rudyc/Dockerfile
     command: rudyc
+    environment:
+      - RUDYWEB_URL=http://rudyweb
     depends_on:
       - rudyweb
 
