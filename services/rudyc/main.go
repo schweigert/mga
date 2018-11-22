@@ -1,12 +1,11 @@
 package main
 
 import (
-	"crypto/sha1"
-	"fmt"
 	"log"
 	"math/rand"
 	"strconv"
 
+	"github.com/schweigert/mga/libraries/security"
 	"github.com/schweigert/mga/model"
 )
 
@@ -17,10 +16,8 @@ func initUsername() {
 }
 
 func initPassword() {
-	USER_ACCOUNT.Password = "pass#" + strconv.Itoa(rand.Int()%100000)
-
-	// Apply sha1 over this account
-	USER_ACCOUNT.Password = fmt.Sprintf("%x", sha1.Sum([]byte(USER_ACCOUNT.Password)))
+	unsecuredPassword := "pass#" + strconv.Itoa(rand.Int()%100000)
+	USER_ACCOUNT.Password = security.Hash(unsecuredPassword)
 }
 
 func init() {
