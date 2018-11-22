@@ -3,19 +3,34 @@ package db
 import (
 	"log"
 	"os"
+	"time"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
-func Connect() *gorm.DB {
-	db, err := gorm.Open("postgres", os.Getenv("DB_CONFIG"))
-	if err != nil {
-		log.Panic(err)
-	}
+var dbcChan chan *gorm.DB
 
-	db.LogMode(true)
-	return db
+func init() {
+	dbcChan = make(chan *gorm.DB, 5)
+	go dbcChanProducer()
+}
+
+func dbcChanProducer() {
+	for {
+		dbc, err := gorm.Open("postgres", os.Getenv("DB_CONFIG"))
+		if err != nil {
+			log.Println(err)
+			time.Sleep(2 * time.Second)
+		} else {
+			dbc.LogMode(true)
+			dbcChan <- dbc
+		}
+	}
+}
+
+func Connect() *gorm.DB {
+	return <-dbcChan
 }
 
 func SafeClose(dbc *gorm.DB) {
