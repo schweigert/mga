@@ -1,29 +1,35 @@
 package main
 
 import (
+	"crypto/sha1"
+	"fmt"
 	"log"
 	"math/rand"
 	"strconv"
+
+	"github.com/schweigert/mga/model"
 )
 
-var USER_ID string
-var PASS_ID string
+var USER_ACCOUNT model.Account
 
-func initUserID() {
-	USER_ID = "user#" + strconv.Itoa(rand.Int()%100000)
+func initUsername() {
+	USER_ACCOUNT.Username = "user#" + strconv.Itoa(rand.Int()%100000)
 }
 
-func initPassID() {
-	PASS_ID = "pass#" + strconv.Itoa(rand.Int()%100000)
+func initPassword() {
+	USER_ACCOUNT.Password = "pass#" + strconv.Itoa(rand.Int()%100000)
+
+	// Apply sha1 over this account
+	USER_ACCOUNT.Password = fmt.Sprintf("%x", sha1.Sum([]byte(USER_ACCOUNT.Password)))
 }
 
 func init() {
-	initUserID()
-	initPassID()
+	initUsername()
+	initPassword()
 }
 
 func main() {
 	log.Println("Starting Rudy Client...")
-	log.Println("USER_ID:", USER_ID)
-	log.Println("PASS_ID:", PASS_ID)
+	log.Println("Username:", USER_ACCOUNT.Username)
+	log.Println("Password:", USER_ACCOUNT.Password)
 }
