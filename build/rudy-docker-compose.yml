@@ -9,8 +9,11 @@ services:
     command: rudyc
     environment:
       - RUDYWEB_URL=http://rudyweb
+      - GRAPHITE_PORT=2003
+      - GRAPHITE_ADDR=graphite
     depends_on:
       - rudyweb
+      - graphite
 
   rudydb:
     build:
@@ -49,3 +52,18 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - TZ=GMT
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 5050:3000
+    volumes:
+      - grafana-volume
+
+  graphite:
+    image: graphiteapp/graphite-statsd
+    container_name: graphite
+    ports:
+      - 2003:2003
+    restart: always

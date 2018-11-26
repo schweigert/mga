@@ -6,6 +6,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/schweigert/mga/libraries/metric"
 	"github.com/schweigert/mga/libraries/security"
 	"github.com/schweigert/mga/model"
 )
@@ -40,8 +41,8 @@ func init() {
 }
 
 func steps() {
-	createAccount()
-	createCharacter()
+	metric.Timer("create_account", createAccount)
+	metric.Timer("create_character", createCharacter)
 
 	log.Println(USER_CHARACTER)
 }

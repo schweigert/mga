@@ -3,7 +3,7 @@
 
 # mga
 
-Go Massive Game Architecture.
+Go Massively Game Architecture.
 
 ## Dev deps
 

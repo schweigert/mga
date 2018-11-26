@@ -34,4 +34,4 @@ build_rudy:
 	sudo docker-compose -f build/rudy-docker-compose.yml build
 
 rudy: build_rudy
-	sudo docker-compose -f build/rudy-docker-compose.yml up
+	sudo docker-compose -f build/rudy-docker-compose.yml up --scale rudyc=5

@@ -91,6 +91,12 @@
 			"revisionTime": "2018-10-16T16:26:27Z"
 		},
 		{
+			"checksumSHA1": "2mnJso72OK8g3NJY1/peCMDY40Y=",
+			"path": "github.com/marpaia/graphite-golang",
+			"revision": "134b9af18cf31f936ebddbd11c03eead4d501601",
+			"revisionTime": "2017-12-31T17:21:05Z"
+		},
+		{
 			"checksumSHA1": "GiVgQkx5acnq+JZtYiuHPlhHoso=",
 			"path": "github.com/mattn/go-isatty",
 			"revision": "3fb116b820352b7f0c281308a4d6250c22d94e27",
