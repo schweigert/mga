@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"log"
 
 	"github.com/parnurzeal/gorequest"
 	"github.com/schweigert/mga/model"
@@ -34,8 +33,6 @@ func createAccount() {
 	if err := json.Unmarshal([]byte(body), data); err != nil {
 		panic(err)
 	}
-
-	log.Println(data.Body)
 
 	value := &createAccountRequestSubEnvelope{Account: &USER_ACCOUNT}
 	if err := json.Unmarshal([]byte(data.Body), &value); err != nil {

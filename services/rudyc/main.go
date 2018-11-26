@@ -12,6 +12,7 @@ import (
 
 var (
 	USER_ACCOUNT           model.Account
+	USER_CHARACTER         model.Character
 	RUDYWEB_URL            string
 	RUDYWEB_ACCOUNT_PATH   string
 	RUDYWEB_CHARACTER_PATH string
@@ -40,6 +41,9 @@ func init() {
 
 func steps() {
 	createAccount()
+	createCharacter()
+
+	log.Println(USER_CHARACTER)
 }
 
 func main() {
