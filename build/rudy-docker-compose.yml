@@ -30,6 +30,16 @@ services:
     depends_on:
       - postgres
 
+  rudygh:
+    build:
+      context: ../.
+      dockerfile: build/rudygh/Dockerfile
+    command: rudygh
+    environment:
+      - ADDR=0.0.0.0:3000
+    depends_on:
+      - postgres
+
   rudyweb:
     build:
       context: ../.

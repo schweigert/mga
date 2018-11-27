@@ -4,10 +4,11 @@ import (
 	"log"
 	"net"
 	"net/rpc"
+	"os"
 )
 
 func main() {
-	addy, err := net.ResolveTCPAddr("tcp", "0.0.0.0:4321")
+	addy, err := net.ResolveTCPAddr("tcp", os.Getenv("ADDR"))
 	if err != nil {
 		log.Fatal(err)
 	}
