@@ -13,7 +13,6 @@ services:
       - GRAPHITE_ADDR=graphite
     depends_on:
       - rudyweb
-      - graphite
 
   rudydb:
     build:
@@ -67,3 +66,7 @@ services:
     ports:
       - 2003:2003
     restart: always
+
+volumes:
+  grafana-volume:
+    external: true

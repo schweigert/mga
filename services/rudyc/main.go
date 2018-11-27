@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/schweigert/mga/libraries/metric"
 	"github.com/schweigert/mga/libraries/security"
@@ -48,6 +49,7 @@ func steps() {
 }
 
 func main() {
+	time.Sleep(10 * time.Second)
 	log.Println("Starting Rudy Client...")
 	log.Println("Username:", USER_ACCOUNT.Username)
 	log.Println("Password:", USER_ACCOUNT.Password)

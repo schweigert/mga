@@ -12,16 +12,15 @@ var mutex *sync.Mutex
 func init() {
 	log.Println("Starting randomizer...")
 
-	// Init Seed
-	seed := time.Now().UnixNano()
-	rand.Seed(seed)
-	log.Println("Seed", seed)
-
 	// Init mutex
 	mutex = &sync.Mutex{}
 }
 
 func Int(max int) int {
+	// Init Seed
+	seed := time.Now().UnixNano()
+	rand.Seed(seed)
+
 	mutex.Lock()
 	defer mutex.Unlock()
 

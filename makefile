@@ -33,5 +33,8 @@ lint:
 build_rudy:
 	sudo docker-compose -f build/rudy-docker-compose.yml build
 
-rudy: build_rudy
-	sudo docker-compose -f build/rudy-docker-compose.yml up --scale rudyc=5
+down_rudy:
+	sudo docker-compose -f build/rudy-docker-compose.yml down
+
+rudy: down_rudy build_rudy
+	sudo docker-compose -f build/rudy-docker-compose.yml up --scale rudyc=2
