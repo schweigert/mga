@@ -3,8 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"strconv"
 
 	"github.com/parnurzeal/gorequest"
+	"github.com/schweigert/mga/libraries/randomizer"
 	"github.com/schweigert/mga/model"
 )
 
@@ -22,7 +24,7 @@ func createCharacterRequest() (gorequest.Response, string, []error) {
 
 func createCharacter() {
 	USER_CHARACTER.AccountID = USER_ACCOUNT.ID
-	USER_CHARACTER.Name = fmt.Sprintf("char@%s", USER_ACCOUNT.Username)
+	USER_CHARACTER.Name = fmt.Sprintf("char#%s@%s", strconv.Itoa(randomizer.Int(100000)), USER_ACCOUNT.Username)
 
 	resp, body, errs := createCharacterRequest()
 	if len(errs) != 0 {

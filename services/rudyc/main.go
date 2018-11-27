@@ -1,13 +1,14 @@
 package main
 
 import (
+	"fmt"
 	"log"
-	"math/rand"
 	"os"
 	"strconv"
 	"time"
 
 	"github.com/schweigert/mga/libraries/metric"
+	"github.com/schweigert/mga/libraries/randomizer"
 	"github.com/schweigert/mga/libraries/security"
 	"github.com/schweigert/mga/model"
 )
@@ -21,11 +22,11 @@ var (
 )
 
 func initUsername() {
-	USER_ACCOUNT.Username = "user#" + strconv.Itoa(rand.Int()%100000)
+	USER_ACCOUNT.Username = fmt.Sprintf("user%s", strconv.Itoa(randomizer.Int(100000)))
 }
 
 func initPassword() {
-	unsecuredPassword := "pass#" + strconv.Itoa(rand.Int()%100000)
+	unsecuredPassword := fmt.Sprintf("pass%s", strconv.Itoa(randomizer.Int(100000)))
 	USER_ACCOUNT.Password = security.Hash(unsecuredPassword)
 }
 

@@ -13,6 +13,8 @@ services:
       - GRAPHITE_ADDR=graphite
     depends_on:
       - rudyweb
+    volumes:
+      - /dev/urandom:/dev/random
 
   rudydb:
     build:
