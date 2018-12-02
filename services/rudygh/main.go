@@ -19,7 +19,8 @@ func main() {
 	}
 
 	listener := &Listener{}
-	rpc.Register(listener)
-
+	if err = rpc.Register(listener); err != nil {
+		panic(err)
+	}
 	rpc.Accept(inbound)
 }
