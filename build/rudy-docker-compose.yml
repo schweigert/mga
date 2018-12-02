@@ -13,8 +13,15 @@ services:
       - GRAPHITE_ADDR=graphite
     depends_on:
       - rudyweb
-    volumes:
-      - /dev/urandom:/dev/random
+
+
+  rudya:
+    build:
+      context: ../.
+      dockerfile: build/rudya/Dockerfile
+    command: rudya
+    depends_on:
+      - redis
 
   rudydb:
     build:
@@ -53,6 +60,13 @@ services:
       - 3000:80
     depends_on:
       - rudydb
+      - rudya
+
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - 6379:6379
 
   postgres:
     image: postgres:9.6
