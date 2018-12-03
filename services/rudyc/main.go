@@ -45,8 +45,6 @@ func init() {
 func steps() {
 	metric.Timer("create_account", createAccount)
 	metric.Timer("create_character", createCharacter)
-
-	log.Println(USER_CHARACTER)
 }
 
 func main() {
