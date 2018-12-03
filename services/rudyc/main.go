@@ -45,15 +45,13 @@ func init() {
 func steps() {
 	metric.Timer("create_account", createAccount)
 	metric.Timer("create_character", createCharacter)
+	metric.Timer("auth_account", authAccount)
 }
 
 func main() {
 	time.Sleep(10 * time.Second)
-	log.Println("Starting Rudy Client...")
 	log.Println("Username:", USER_ACCOUNT.Username)
 	log.Println("Password:", USER_ACCOUNT.Password)
-
-	log.Println("Rudyweb URL:", RUDYWEB_URL)
 
 	steps()
 }

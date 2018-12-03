@@ -20,6 +20,9 @@ services:
       context: ../.
       dockerfile: build/rudya/Dockerfile
     command: rudya
+    environment:
+      - ADDR=0.0.0.0:3000
+      - REDIS_ADDR=redis:6379
     depends_on:
       - redis
 
