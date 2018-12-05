@@ -1,5 +1,7 @@
 package model
 
+import "fmt"
+
 type Account struct {
 	Base
 
@@ -7,4 +9,8 @@ type Account struct {
 	Password string
 
 	Characters []Character
+}
+
+func (account *Account) AuthKey() string {
+	return fmt.Sprintf("authToken:%s", account.Username)
 }
