@@ -9,6 +9,7 @@ services:
     command: rudyc
     environment:
       - RUDYWEB_URL=http://rudyweb
+      - RUDYGH_ADDR=rudygh:3000
       - GRAPHITE_PORT=2003
       - GRAPHITE_ADDR=graphite
     depends_on:
@@ -22,6 +23,7 @@ services:
     command: rudya
     environment:
       - ADDR=0.0.0.0:3000
+      - RUDYDB_ADDR=http://rudydb
       - REDIS_ADDR=redis:6379
     depends_on:
       - redis
@@ -47,6 +49,7 @@ services:
     command: rudygh
     environment:
       - ADDR=0.0.0.0:3000
+      - RUDYA_ADDR=rudya:3000
     depends_on:
       - postgres
 

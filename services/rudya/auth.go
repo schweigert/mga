@@ -1,26 +1,46 @@
 package main
 
 import (
+	"encoding/json"
+	"errors"
 	"os"
-	"strconv"
 
 	"github.com/go-redis/redis"
-	"github.com/schweigert/mga/libraries/randomizer"
+	"github.com/parnurzeal/gorequest"
 	"github.com/schweigert/mga/model"
 )
 
-func (l *Listener) Autorize(account model.Account, token *string) (err error) {
+func (l *Listener) Auth(account model.Account, canAuth *bool) error {
+	resp, body, _ := gorequest.New().Post(os.Getenv("RUDYDB_ADDR") + "/account/show").Send(account).End()
+
+	if resp.StatusCode != 200 {
+		panic("Status code != 200")
+	}
+
+	dbAccount := &model.Account{}
+	err := json.Unmarshal([]byte(body), dbAccount)
+
+	if dbAccount.Password != account.Password {
+		return errors.New("Auth error")
+	}
+
 	client := redis.NewClient(&redis.Options{
 		Addr: os.Getenv("REDIS_ADDR"),
 		DB:   0,
 	})
+	defer client.Close()
 
-	randToken := strconv.Itoa(randomizer.Int(10000000))
+	token, err := client.Get(account.AuthKey()).Result()
 
-	err = client.Set(account.AuthKey(), randToken, 0).Err()
+	var status bool
+
 	if err != nil {
-		token = &randToken
+		status = false
+	} else {
+		status = account.CanAuth(token)
 	}
 
-	return
+	canAuth = &status
+
+	return nil
 }
