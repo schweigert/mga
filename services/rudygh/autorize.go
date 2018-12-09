@@ -7,13 +7,17 @@ import (
 	"github.com/schweigert/mga/model"
 )
 
-func (l *Listener) Auth(account model.Account, ack *bool) error {
+func (l *Listener) Autorize(account model.Account, authAccount *model.Account) error {
 	client, err := rpc.Dial("tcp", os.Getenv("RUDYA_ADDR"))
 	if err != nil {
 		panic(err)
 	}
 
 	defer client.Close()
+	err = client.Call("Listener.Autorize", account, &authAccount)
+	if err != nil {
+		panic(err)
+	}
 
-	return client.Call("Listener.Auth", account, ack)
+	return nil
 }

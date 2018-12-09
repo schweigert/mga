@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"os"
 	"strconv"
 
@@ -9,7 +10,7 @@ import (
 	"github.com/schweigert/mga/model"
 )
 
-func (l *Listener) Autorize(account model.Account, token *string) (err error) {
+func (l *Listener) Autorize(account model.Account, authAccount *model.Account) (err error) {
 	client := redis.NewClient(&redis.Options{
 		Addr: os.Getenv("REDIS_ADDR"),
 		DB:   0,
@@ -21,8 +22,11 @@ func (l *Listener) Autorize(account model.Account, token *string) (err error) {
 
 	err = client.Set(account.AuthKey(), randToken, 0).Err()
 	if err != nil {
-		token = &randToken
+		panic(err)
 	}
+
+	authAccount.AuthToken = randToken
+	log.Println(authAccount)
 
 	return
 }
