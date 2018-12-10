@@ -8,6 +8,8 @@ type Character struct {
 	MaxHP int
 	Atack int
 
+	AuthToken string
+
 	Items     []Item
 	AccountID uint
 }
