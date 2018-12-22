@@ -10,7 +10,9 @@ import (
 )
 
 var (
-	SURROUNDINGS   [5]*surroundings.Surroundings
+	// Surroundings are a map structure of this service
+	Surroundings [5]*surroundings.Surroundings
+	// AuthTokenCache store all auth tokens
 	AuthTokenCache map[int]string
 )
 
@@ -24,11 +26,11 @@ func initAuthTokenCache() {
 }
 
 func initSurroundings() {
-	SURROUNDINGS[0] = surroundings.NewSurroundings()
-	SURROUNDINGS[1] = surroundings.NewSurroundings()
-	SURROUNDINGS[2] = surroundings.NewSurroundings()
-	SURROUNDINGS[3] = surroundings.NewSurroundings()
-	SURROUNDINGS[4] = surroundings.NewSurroundings()
+	Surroundings[0] = surroundings.NewSurroundings()
+	Surroundings[1] = surroundings.NewSurroundings()
+	Surroundings[2] = surroundings.NewSurroundings()
+	Surroundings[3] = surroundings.NewSurroundings()
+	Surroundings[4] = surroundings.NewSurroundings()
 }
 
 func main() {

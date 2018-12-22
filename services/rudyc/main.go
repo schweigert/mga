@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/rpc"
 	"os"
 	"strconv"
 	"time"
@@ -20,6 +21,7 @@ var (
 	RudyWebURL           string
 	RudyWebAccountPath   string
 	RudyWebCharacterPath string
+	RPCClient            *rpc.Client
 )
 
 func initUsername() {
@@ -47,6 +49,7 @@ func steps() {
 	metric.Timer("create_account", createAccount)
 	metric.Timer("create_character", createCharacter)
 	metric.Timer("auth_account", authAccount)
+	metric.Timer("select_character", selectCharacter)
 }
 
 func main() {

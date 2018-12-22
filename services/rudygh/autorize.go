@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/rpc"
 	"os"
 
@@ -19,5 +20,7 @@ func (l *Listener) Autorize(account model.Account, authAccount *model.Account) e
 		panic(err)
 	}
 
+	AuthTokenCache[int(account.ID)] = authAccount.AuthToken
+	log.Println("Creating auth cache:", int(account.ID), authAccount.AuthToken)
 	return nil
 }

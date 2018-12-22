@@ -8,6 +8,10 @@ import (
 )
 
 func AuthToken(account model.Account) bool {
+	if AuthTokenCache[int(account.ID)] == account.AuthToken {
+		return true
+	}
+
 	client, err := rpc.Dial("tcp", os.Getenv("RUDYA_ADDR"))
 	if err != nil {
 		panic(err)
