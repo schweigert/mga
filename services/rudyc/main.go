@@ -13,27 +13,28 @@ import (
 	"github.com/schweigert/mga/model"
 )
 
+// Global Client Variables
 var (
-	USER_ACCOUNT           model.Account
-	USER_CHARACTER         model.Character
-	RUDYWEB_URL            string
-	RUDYWEB_ACCOUNT_PATH   string
-	RUDYWEB_CHARACTER_PATH string
+	UserAccount          model.Account
+	UserCharacter        model.Character
+	RudyWebURL           string
+	RudyWebAccountPath   string
+	RudyWebCharacterPath string
 )
 
 func initUsername() {
-	USER_ACCOUNT.Username = fmt.Sprintf("user%s", strconv.Itoa(randomizer.Int(100000)))
+	UserAccount.Username = fmt.Sprintf("user%s", strconv.Itoa(randomizer.Int(100000)))
 }
 
 func initPassword() {
 	unsecuredPassword := fmt.Sprintf("pass%s", strconv.Itoa(randomizer.Int(100000)))
-	USER_ACCOUNT.Password = security.Hash(unsecuredPassword)
+	UserAccount.Password = security.Hash(unsecuredPassword)
 }
 
 func initRudywebUrl() {
-	RUDYWEB_URL = os.Getenv("RUDYWEB_URL")
-	RUDYWEB_ACCOUNT_PATH = RUDYWEB_URL + "/account/create"
-	RUDYWEB_CHARACTER_PATH = RUDYWEB_URL + "/character/create"
+	RudyWebURL = os.Getenv("RUDYWEB_URL")
+	RudyWebAccountPath = RudyWebURL + "/account/create"
+	RudyWebCharacterPath = RudyWebURL + "/character/create"
 }
 
 func init() {
@@ -50,8 +51,8 @@ func steps() {
 
 func main() {
 	time.Sleep(10 * time.Second)
-	log.Println("Username:", USER_ACCOUNT.Username)
-	log.Println("Password:", USER_ACCOUNT.Password)
+	log.Println("Username:", UserAccount.Username)
+	log.Println("Password:", UserAccount.Password)
 
 	steps()
 }

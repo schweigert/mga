@@ -14,10 +14,10 @@ func authAccount() {
 
 	defer client.Close()
 
-	err = client.Call("Listener.Autorize", USER_ACCOUNT, &USER_ACCOUNT)
+	err = client.Call("Listener.Autorize", UserAccount, &UserAccount)
 	if err != nil {
 		panic(err)
 	}
 
-	log.Println("AUTHED CLIENT:", USER_ACCOUNT)
+	log.Println("AUTHED CLIENT:", UserAccount)
 }

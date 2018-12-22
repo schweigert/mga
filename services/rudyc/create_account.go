@@ -16,7 +16,7 @@ type createAccountRequestSubEnvelope struct {
 }
 
 func createAccountRequest() (gorequest.Response, string, []error) {
-	return gorequest.New().Post(RUDYWEB_ACCOUNT_PATH).Send(USER_ACCOUNT).End()
+	return gorequest.New().Post(RudyWebAccountPath).Send(UserAccount).End()
 }
 
 func createAccount() {
@@ -34,7 +34,7 @@ func createAccount() {
 		panic(err)
 	}
 
-	value := &createAccountRequestSubEnvelope{Account: &USER_ACCOUNT}
+	value := &createAccountRequestSubEnvelope{Account: &UserAccount}
 	if err := json.Unmarshal([]byte(data.Body), &value); err != nil {
 		panic(err)
 	}

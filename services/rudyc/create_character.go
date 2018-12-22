@@ -19,12 +19,12 @@ type createCharacterRequestSubEnvelope struct {
 }
 
 func createCharacterRequest() (gorequest.Response, string, []error) {
-	return gorequest.New().Post(RUDYWEB_CHARACTER_PATH).Send(USER_CHARACTER).End()
+	return gorequest.New().Post(RudyWebCharacterPath).Send(UserCharacter).End()
 }
 
 func createCharacter() {
-	USER_CHARACTER.AccountID = USER_ACCOUNT.ID
-	USER_CHARACTER.Name = fmt.Sprintf("char#%s@%s", strconv.Itoa(randomizer.Int(100000)), USER_ACCOUNT.Username)
+	UserCharacter.AccountID = UserAccount.ID
+	UserCharacter.Name = fmt.Sprintf("char#%s@%s", strconv.Itoa(randomizer.Int(100000)), UserAccount.Username)
 
 	resp, body, errs := createCharacterRequest()
 	if len(errs) != 0 {
@@ -40,7 +40,7 @@ func createCharacter() {
 		panic(err)
 	}
 
-	value := &createCharacterRequestSubEnvelope{Character: &USER_CHARACTER}
+	value := &createCharacterRequestSubEnvelope{Character: &UserCharacter}
 	if err := json.Unmarshal([]byte(data.Body), &value); err != nil {
 		panic(err)
 	}
