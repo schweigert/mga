@@ -31,7 +31,7 @@ func initPassword() {
 	UserAccount.Password = security.Hash(unsecuredPassword)
 }
 
-func initRudywebUrl() {
+func initRudyWebURL() {
 	RudyWebURL = os.Getenv("RUDYWEB_URL")
 	RudyWebAccountPath = RudyWebURL + "/account/create"
 	RudyWebCharacterPath = RudyWebURL + "/character/create"
@@ -40,7 +40,7 @@ func initRudywebUrl() {
 func init() {
 	initUsername()
 	initPassword()
-	initRudywebUrl()
+	initRudyWebURL()
 }
 
 func steps() {
