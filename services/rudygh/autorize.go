@@ -22,5 +22,7 @@ func (l *Listener) Autorize(account model.Account, authAccount *model.Account) e
 
 	AuthTokenCache[int(account.ID)] = authAccount.AuthToken
 	log.Println("Creating auth cache:", int(account.ID), authAccount.AuthToken)
+
+	authAccount.Characters = account.Characters
 	return nil
 }

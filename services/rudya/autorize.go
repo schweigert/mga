@@ -26,6 +26,7 @@ func (l *Listener) Autorize(account model.Account, authAccount *model.Account) (
 	}
 
 	authAccount.AuthToken = randToken
+	authAccount.Characters = account.Characters
 	log.Println(authAccount)
 
 	return
