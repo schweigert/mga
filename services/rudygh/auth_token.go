@@ -7,6 +7,7 @@ import (
 	"github.com/schweigert/mga/model"
 )
 
+// AuthToken certify if an account can auth into rudygh
 func AuthToken(account model.Account) bool {
 	if AuthTokenCache[int(account.ID)] == account.AuthToken {
 		return true

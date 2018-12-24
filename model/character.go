@@ -3,6 +3,9 @@ package model
 type Character struct {
 	Base
 
+	PositionX int
+	PositionY int
+
 	Name  string
 	HP    int
 	MaxHP int
