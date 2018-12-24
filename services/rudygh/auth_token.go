@@ -17,7 +17,13 @@ func AuthToken(account model.Account) bool {
 		panic(err)
 	}
 
-	defer client.Close()
+	defer func() {
+		errO := client.Close()
+		if errO != nil {
+			panic(errO)
+		}
+	}()
+
 	var ret bool
 	err = client.Call("Listener.Auth", account, &ret)
 	if err != nil {

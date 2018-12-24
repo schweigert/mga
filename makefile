@@ -20,7 +20,6 @@ lint:
 		--enable=deadcode \
 		--enable=ineffassign \
 		--enable=gosimple \
-		--enable=staticcheck \
 		--enable=gofmt \
 		--enable=goimports \
 		--enable=misspell \

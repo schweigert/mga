@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"errors"
+	"log"
 	"os"
 
 	"github.com/go-redis/redis"
@@ -10,7 +11,11 @@ import (
 	"github.com/schweigert/mga/model"
 )
 
+// Auth receive an account and return true or false if can auth
 func (l *Listener) Auth(account model.Account, canAuth *bool) error {
+	var status bool
+	canAuth = &status
+
 	resp, body, _ := gorequest.New().Post(os.Getenv("RUDYDB_ADDR") + "/account/show").Send(account).End()
 
 	if resp.StatusCode != 200 {
@@ -19,6 +24,9 @@ func (l *Listener) Auth(account model.Account, canAuth *bool) error {
 
 	dbAccount := &model.Account{}
 	err := json.Unmarshal([]byte(body), dbAccount)
+	if err != nil {
+		panic(err)
+	}
 
 	if dbAccount.Password != account.Password {
 		return errors.New("Auth error")
@@ -28,11 +36,14 @@ func (l *Listener) Auth(account model.Account, canAuth *bool) error {
 		Addr: os.Getenv("REDIS_ADDR"),
 		DB:   0,
 	})
-	defer client.Close()
+	defer func() {
+		errO := client.Close()
+		if errO != nil {
+			panic(errO)
+		}
+	}()
 
 	token, err := client.Get(account.AuthKey()).Result()
-
-	var status bool
 
 	if err != nil {
 		status = false
@@ -40,7 +51,7 @@ func (l *Listener) Auth(account model.Account, canAuth *bool) error {
 		status = account.CanAuth(token)
 	}
 
-	canAuth = &status
+	log.Println("Can auth for account", account.ID, ":", *canAuth)
 
 	return nil
 }

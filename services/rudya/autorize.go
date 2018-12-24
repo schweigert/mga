@@ -10,13 +10,19 @@ import (
 	"github.com/schweigert/mga/model"
 )
 
+// Autorize an account to connect into rudy game architecture
 func (l *Listener) Autorize(account model.Account, authAccount *model.Account) (err error) {
 	client := redis.NewClient(&redis.Options{
 		Addr: os.Getenv("REDIS_ADDR"),
 		DB:   0,
 	})
 
-	defer client.Close()
+	defer func() {
+		errO := client.Close()
+		if errO != nil {
+			panic(errO)
+		}
+	}()
 
 	randToken := strconv.Itoa(randomizer.Int(10000000))
 
