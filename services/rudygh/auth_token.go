@@ -7,6 +7,14 @@ import (
 	"github.com/schweigert/mga/model"
 )
 
+// AuthCharacter check in auth token cache if this account has authed
+func AuthCharacter(character model.Character) bool {
+	if AuthTokenCache[int(character.AccountID)] == character.AuthToken {
+		return true
+	}
+	return false
+}
+
 // AuthToken certify if an account can auth into rudygh
 func AuthToken(account model.Account) bool {
 	if AuthTokenCache[int(account.ID)] == account.AuthToken {

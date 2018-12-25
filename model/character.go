@@ -5,6 +5,7 @@ type Character struct {
 
 	PositionX int
 	PositionY int
+	Region    int
 
 	Name  string
 	HP    int

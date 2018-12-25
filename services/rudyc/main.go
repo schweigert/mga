@@ -22,6 +22,7 @@ var (
 	RudyWebAccountPath   string
 	RudyWebCharacterPath string
 	RPCClient            *rpc.Client
+	ROI                  [100][100][]model.Character
 )
 
 func initUsername() {
@@ -50,6 +51,9 @@ func steps() {
 	metric.Timer("create_character", createCharacter)
 	metric.Timer("auth_account", authAccount)
 	metric.Timer("select_character", selectCharacter)
+	for {
+		metric.Timer("roi_character", roiCharacter)
+	}
 }
 
 func main() {
