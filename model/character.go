@@ -1,11 +1,14 @@
 package model
 
+// Character store positions and combat data of an character
 type Character struct {
 	Base
 
-	PositionX int
-	PositionY int
-	Region    int
+	PositionX  int
+	PositionY  int
+	DirectionX int
+	DirectionY int
+	Region     int
 
 	Name  string
 	HP    int

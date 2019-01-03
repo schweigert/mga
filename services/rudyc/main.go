@@ -53,6 +53,7 @@ func steps() {
 	metric.Timer("select_character", selectCharacter)
 	for {
 		metric.Timer("roi_character", roiCharacter)
+		metric.Timer("move_character", moveCharacter)
 	}
 }
 
