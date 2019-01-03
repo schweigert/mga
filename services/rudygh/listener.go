@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"log"
 	"sync"
 
 	"github.com/schweigert/mga/model"
@@ -15,10 +14,9 @@ type Listener struct {
 	mapOperation  sync.Mutex
 }
 
-func (l *Listener) moveCharacter(character *model.Character) error {
+func (l *Listener) moveCharacter(character model.Character) error {
 	l.mapOperation.Lock()
 	defer l.mapOperation.Unlock()
-	log.Println("Finding character", character.ID, "at:", character.Region, character.PositionX, character.PositionY)
 	// Remove old character
 	for index, otherCharacter := range l.Map[character.Region][character.PositionX][character.PositionY] {
 		if otherCharacter.ID == character.ID {
@@ -26,29 +24,14 @@ func (l *Listener) moveCharacter(character *model.Character) error {
 
 			l.Map[character.Region][character.PositionX][character.PositionY] = append(characterArray[:index], characterArray[index+1:]...)
 
-			character.PositionX += character.DirectionX
-			character.PositionY += character.DirectionY
-
-			character.Region %= 5
-			character.PositionX %= 100
-			character.PositionY %= 100
-
-			if character.PositionX < 0 {
-				character.PositionX *= -1
-			}
-
-			if character.PositionY < 0 {
-				character.PositionY *= -1
-			}
-
-			log.Println("Moving character", character.ID, "to:", character.Region, character.PositionX, character.PositionY)
+			character.Move()
 
 			// Append to the new position
-			l.Map[character.Region][character.PositionX][character.PositionY] = append(l.Map[character.Region][character.PositionX][character.PositionY], *character)
+			l.Map[character.Region][character.PositionX][character.PositionY] = append(l.Map[character.Region][character.PositionX][character.PositionY], character)
 
 			for index, otherListCharacter := range l.CharacterList {
 				if otherListCharacter.ID == character.ID {
-					l.CharacterList[index] = *character
+					l.CharacterList[index] = character
 					return nil
 				}
 			}

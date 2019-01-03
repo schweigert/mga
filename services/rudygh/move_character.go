@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"log"
 
 	"github.com/schweigert/mga/model"
 )
@@ -15,10 +14,8 @@ func (l *Listener) MoveCharacter(character model.Character, postCharacter *model
 		}
 	}
 
+	err := l.moveCharacter(character)
 	postCharacter = &character
-	log.Println("Character", character.ID)
-	log.Println("Before", character.PositionX, postCharacter.PositionX)
-	err := l.moveCharacter(postCharacter)
-	log.Println("After", character.PositionX, postCharacter.PositionX)
+	postCharacter.Move()
 	return err
 }
