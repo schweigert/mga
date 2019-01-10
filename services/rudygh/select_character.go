@@ -22,5 +22,7 @@ func (l *Listener) SelectCharacter(account model.Account, selectedCharacter *mod
 	l.appendCharacter(account.Characters[0])
 	l.respawCharacterIntoMap(account.Characters[0])
 
+	ChatChain[account.Characters[0].ID] = make(chan model.Chat, 20)
+
 	return nil
 }

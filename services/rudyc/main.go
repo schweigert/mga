@@ -54,6 +54,8 @@ func steps() {
 	for {
 		metric.Timer("roi_character", roiCharacter)
 		metric.Timer("move_character", moveCharacter)
+		metric.Timer("send_chat", sendPositionMessageChat)
+		metric.Timer("receive_chats", receiveChats)
 	}
 }
 

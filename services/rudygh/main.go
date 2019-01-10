@@ -5,15 +5,24 @@ import (
 	"net"
 	"net/rpc"
 	"os"
+
+	"github.com/schweigert/mga/model"
 )
 
 var (
 	// AuthTokenCache store all auth tokens
 	AuthTokenCache map[int]string
+	// ChatChain store chat messages
+	ChatChain map[uint]chan model.Chat
 )
 
 func init() {
 	initAuthTokenCache()
+	initChatChain()
+}
+
+func initChatChain() {
+	ChatChain = make(map[uint]chan model.Chat)
 }
 
 func initAuthTokenCache() {
