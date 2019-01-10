@@ -9,10 +9,7 @@ import (
 
 // AuthCharacter check in auth token cache if this account has authed
 func AuthCharacter(character model.Character) bool {
-	if AuthTokenCache[int(character.AccountID)] == character.AuthToken {
-		return true
-	}
-	return false
+	return AuthTokenCache[int(character.AccountID)] == character.AuthToken
 }
 
 // AuthToken certify if an account can auth into rudygh
