@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  salza:
+    build:
+      context: ../.
+      dockerfile: build/salza/Dockerfile
+    command: salza
+    environment:
+      - ADDR=0.0.0.0:3000
+    depends_on:
+      - postgres
+
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - 6379:6379
+
+  postgres:
+    image: postgres:9.6
+    ports:
+      - 5432
+    environment:
+      - POSTGRES_DB=game
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - TZ=GMT
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 5050:3000
+    volumes:
+      - grafana-volume
+
+  graphite:
+    image: graphiteapp/graphite-statsd
+    container_name: graphite
+    ports:
+      - 2003:2003
+    restart: always
+
+volumes:
+  grafana-volume:
+    external: true
