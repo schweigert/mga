@@ -47,15 +47,19 @@ func init() {
 }
 
 func steps() {
-	metric.Timer("create_account", createAccount)
-	metric.Timer("create_character", createCharacter)
-	metric.Timer("auth_account", authAccount)
-	metric.Timer("select_character", selectCharacter)
+	metric.Timer("rudyc.create_account", createAccount)
+	metric.Timer("rudyc.create_character", createCharacter)
+	metric.Timer("rudyc.auth_account", authAccount)
+	metric.Timer("rudyc.select_character", selectCharacter)
 	for {
-		metric.Timer("roi_character", roiCharacter)
-		metric.Timer("move_character", moveCharacter)
-		metric.Timer("send_chat", sendPositionMessageChat)
-		metric.Timer("receive_chats", receiveChats)
+		metric.Timer("rudyc.roi_character", roiCharacter)
+		if randomizer.Int(100) > 50 {
+			metric.Timer("rudyc.move_character", moveCharacter)
+		}
+		if randomizer.Int(100) < 10 {
+			metric.Timer("rudyc.send_chat", sendPositionMessageChat)
+		}
+		metric.Timer("rudyc.receive_chats", receiveChats)
 	}
 }
 

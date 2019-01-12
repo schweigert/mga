@@ -8,7 +8,7 @@ import (
 
 func sendPositionMessageChat() {
 	chat := model.Chat{}
-	chat.Line = fmt.Sprintf("%s: I'm in (%3d, %3d)", UserCharacter.Name, UserCharacter.PositionX, UserCharacter.PositionY)
+	chat.Line = fmt.Sprintf("%s: I'm in this position: (%3d, %3d)", UserCharacter.Name, UserCharacter.PositionX, UserCharacter.PositionY)
 	chat.Character = UserCharacter
 
 	err := RPCClient.Call("Listener.SendChat", chat, &chat)
