@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/schweigert/mga/libraries/db"
 	"github.com/schweigert/mga/model"
-	"github.com/schweigert/mga/services/rudydb/internal/db"
 )
 
 func migrate() {

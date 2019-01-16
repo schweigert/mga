@@ -18,7 +18,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if err = rpc.Register(&listener{}); err != nil {
+	if err = rpc.Register(&Listener{}); err != nil {
 		panic(err)
 	}
 	rpc.Accept(inbound)

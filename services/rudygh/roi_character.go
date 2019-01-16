@@ -10,7 +10,7 @@ import (
 func (l *Listener) RoiCharacter(character model.Character, characterRoi *[100][100][]model.Character) error {
 	if AuthCharacter(character) {
 		roi := l.regionOfInterest(character)
-		characterRoi = &roi
+		*characterRoi = roi
 		return nil
 	}
 	return errors.New("AuthError")

@@ -2,10 +2,11 @@ package handlers
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/schweigert/mga/libraries/db"
 	"github.com/schweigert/mga/model"
-	"github.com/schweigert/mga/services/rudydb/internal/db"
 )
 
+// IndexItemHandler handler
 func IndexItemHandler(c *gin.Context) {
 	dbc := db.Connect()
 	defer db.SafeClose(dbc)
@@ -16,6 +17,7 @@ func IndexItemHandler(c *gin.Context) {
 	c.JSON(200, items)
 }
 
+// ShowItemHandler handler
 func ShowItemHandler(c *gin.Context) {
 	dbc := db.Connect()
 	defer db.SafeClose(dbc)
@@ -28,6 +30,7 @@ func ShowItemHandler(c *gin.Context) {
 	}
 }
 
+// CreateItemHandler handler
 func CreateItemHandler(c *gin.Context) {
 	dbc := db.Connect()
 	defer db.SafeClose(dbc)
@@ -39,6 +42,7 @@ func CreateItemHandler(c *gin.Context) {
 	}
 }
 
+// UpdateItemHandler handler
 func UpdateItemHandler(c *gin.Context) {
 	dbc := db.Connect()
 	defer db.SafeClose(dbc)
@@ -50,6 +54,7 @@ func UpdateItemHandler(c *gin.Context) {
 	}
 }
 
+// DestroyItemHandler handler
 func DestroyItemHandler(c *gin.Context) {
 	dbc := db.Connect()
 	defer db.SafeClose(dbc)
