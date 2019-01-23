@@ -11,7 +11,20 @@ import (
 
 var router *gin.Engine
 
+func migrate() {
+	dbc := db.Connect()
+	defer db.SafeClose(dbc)
+
+	dbc.AutoMigrate(
+		&model.Account{},
+		&model.Character{},
+		&model.Item{},
+	)
+}
+
 func init() {
+	migrate()
+
 	router = gin.Default()
 }
 
@@ -22,6 +35,7 @@ func crateAccountHandler(c *gin.Context) {
 	account := &model.Account{}
 	if c.BindJSON(account) == nil {
 		dbc.Create(account)
+		c.JSON(200, account)
 	}
 }
 
