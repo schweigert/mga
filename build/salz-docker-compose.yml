@@ -1,6 +1,18 @@
 version: '3'
 
 services:
+
+  salzc:
+    build:
+      context: ../.
+      dockerfile: build/salzc/Dockerfile
+    command: salzc
+    environment:
+      - GRAPHITE_PORT=2003
+      - GRAPHITE_ADDR=graphite
+    depends_on:
+      - salzweb
+
   salzweb:
     build:
       context: ../.
