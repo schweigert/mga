@@ -73,6 +73,8 @@ services:
     image: redis
     ports:
       - 6379:6379
+    logging:
+      driver: none
 
   postgres:
     image: postgres:9.6
@@ -83,6 +85,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - TZ=GMT
+    logging:
+      driver: none
 
   grafana:
     image: grafana/grafana
@@ -91,6 +95,8 @@ services:
       - 5050:3000
     volumes:
       - grafana-volume
+    logging:
+      driver: none
 
   graphite:
     image: graphiteapp/graphite-statsd
@@ -98,6 +104,8 @@ services:
     ports:
       - 2003:2003
     restart: always
+    logging:
+      driver: none
 
 volumes:
   grafana-volume:
