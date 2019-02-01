@@ -10,6 +10,7 @@ services:
     environment:
       - GRAPHITE_PORT=2003
       - GRAPHITE_ADDR=graphite
+      - RUDYWEB_URL=http://salzweb
     depends_on:
       - salzweb
 
@@ -51,6 +52,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - TZ=GMT
+    logging:
+      driver: none
 
   pgadmin:
     image: dpage/pgadmin4
@@ -59,6 +62,8 @@ services:
       PGADMIN_DEFAULT_PASSWORD: "nopasswd"
     ports:
       - "16543:80"
+    logging:
+      driver: none
 
   grafana:
     image: grafana/grafana
@@ -67,6 +72,8 @@ services:
       - 5050:3000
     volumes:
       - grafana-volume
+    logging:
+      driver: none
 
   graphite:
     image: graphiteapp/graphite-statsd
@@ -74,6 +81,8 @@ services:
     ports:
       - 2003:2003
     restart: always
+    logging:
+      driver: none
 
 volumes:
   grafana-volume:

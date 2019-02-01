@@ -40,6 +40,6 @@ func crateAccountHandler(c *gin.Context) {
 }
 
 func main() {
-	router.POST("accounts/", crateAccountHandler)
+	router.POST("account/create", crateAccountHandler)
 	log.Panic(router.Run(os.Getenv("ADDR")))
 }
