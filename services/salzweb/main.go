@@ -39,7 +39,19 @@ func crateAccountHandler(c *gin.Context) {
 	}
 }
 
+func crateCharacterHandler(c *gin.Context) {
+	dbc := db.Connect()
+	defer db.SafeClose(dbc)
+
+	character := &model.Character{}
+	if c.BindJSON(character) == nil {
+		dbc.Create(character)
+		c.JSON(200, character)
+	}
+}
+
 func main() {
 	router.POST("account/create", crateAccountHandler)
+	router.POST("character/create", crateCharacterHandler)
 	log.Panic(router.Run(os.Getenv("ADDR")))
 }
