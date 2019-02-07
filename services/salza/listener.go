@@ -8,8 +8,6 @@ type Listener struct {
 }
 
 // Auth an account
-func (listener *Listener) Auth(account model.Account, response *bool) (err error) {
-	*response = true
-
+func (listener *Listener) Auth(account model.Account, response *model.Account) (err error) {
 	return
 }

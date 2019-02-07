@@ -10,7 +10,8 @@ services:
     environment:
       - GRAPHITE_PORT=2003
       - GRAPHITE_ADDR=graphite
-      - RUDYWEB_URL=http://salzweb
+      - SALZWEB_URL=http://salzweb
+      - SALZA_ADDR=salza:3000
     depends_on:
       - salzweb
 

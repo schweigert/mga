@@ -35,7 +35,7 @@ func initPassword() {
 }
 
 func initSalzWebURL() {
-	SalzWebURL = os.Getenv("RUDYWEB_URL")
+	SalzWebURL = os.Getenv("SALZWEB_URL")
 	SalzWebAccountPath = SalzWebURL + "/account/create"
 	SalzWebCharacterPath = SalzWebURL + "/character/create"
 }
@@ -50,6 +50,7 @@ func init() {
 func steps() {
 	metric.Timer("salzc.create_account", createAccount)
 	metric.Timer("salzc.create_character", createCharacter)
+	metric.Timer("salzc.auth_account", AuthAccount)
 }
 
 func main() {
