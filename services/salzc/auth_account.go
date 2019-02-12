@@ -13,7 +13,7 @@ func AuthAccount() {
 		panic(err)
 	}
 
-	err = RPCClient.Call("Listener.Autorize", UserAccount, &UserAccount)
+	err = RPCClient.Call("Listener.Auth", UserAccount, &UserAccount)
 	if err != nil {
 		panic(err)
 	}
