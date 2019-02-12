@@ -51,6 +51,7 @@ func steps() {
 	metric.Timer("salzc.create_account", createAccount)
 	metric.Timer("salzc.create_character", createCharacter)
 	metric.Timer("salzc.auth_account", AuthAccount)
+	metric.Timer("salzc.check_account", CheckAccount)
 }
 
 func main() {
