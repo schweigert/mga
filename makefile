@@ -30,17 +30,17 @@ lint:
 		./...
 
 build_rudy:
-	sudo docker-compose -f build/rudy-docker-compose.yml build
+	docker-compose -f build/rudy-docker-compose.yml build
 
 build_salz:
-	sudo docker-compose -f build/salz-docker-compose.yml build
+	docker-compose -f build/salz-docker-compose.yml build
 
 down:
-	sudo docker-compose -f build/rudy-docker-compose.yml down
-	sudo docker-compose -f build/salz-docker-compose.yml down
+	docker-compose -f build/rudy-docker-compose.yml down
+	docker-compose -f build/salz-docker-compose.yml down
 
 rudy: down build_salz
-	sudo docker-compose -f build/rudy-docker-compose.yml up --scale rudyc=3
+	docker-compose -f build/rudy-docker-compose.yml up --scale rudyc=3
 
 salz: down build_salz
-	sudo docker-compose -f build/salz-docker-compose.yml up
+	docker-compose -f build/salz-docker-compose.yml up

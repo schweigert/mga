@@ -12,6 +12,7 @@ services:
       - GRAPHITE_ADDR=graphite
       - SALZWEB_URL=http://salzweb
       - SALZA_ADDR=salza:3000
+      - SALZGH_ADDR=salzgh:3000
     depends_on:
       - salzweb
 
@@ -39,6 +40,17 @@ services:
       - REDIS_ADDR=redis:6379
     depends_on:
       - postgres
+  
+  salzgh:
+    build:
+      context: ../.
+      dockerfile: build/salzgh/Dockerfile
+    command: salzgh
+    environment:
+      - ADDR=0.0.0.0:3000
+      - SALZA_ADDR=salza:3000
+    depends_on:
+      - salza
 
   redis:
     container_name: redis
