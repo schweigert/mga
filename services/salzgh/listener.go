@@ -12,6 +12,10 @@ type Listener struct {
 	Tokens map[string]string
 }
 
+func NewListener() *Listener {
+	return &Listener{Tokens: make(map[string]string)}
+}
+
 func (listener *Listener) checkAccount(account model.Account) bool {
 	cachedToken, ok := listener.Tokens[account.Username]
 	if ok {
@@ -39,7 +43,7 @@ func (listener *Listener) checkAccount(account model.Account) bool {
 	return check
 }
 
-func (listener *Listener) SelectCharcter(account model.Account, selectedCharacter *model.Character) (err error) {
+func (listener *Listener) SelectCharacter(account model.Account, selectedCharacter *model.Character) (err error) {
 	if !listener.checkAccount(account) {
 		return errors.New("not authenticated")
 	}

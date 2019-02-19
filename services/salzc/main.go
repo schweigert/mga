@@ -22,6 +22,7 @@ var (
 	SalzWebAccountPath   string
 	SalzWebCharacterPath string
 	RPCClient            *rpc.Client
+	RPCGHClient          *rpc.Client
 	ROI                  [100][100][]model.Character
 )
 
@@ -52,6 +53,7 @@ func steps() {
 	metric.Timer("salzc.create_character", createCharacter)
 	metric.Timer("salzc.auth_account", AuthAccount)
 	metric.Timer("salzc.check_account", CheckAccount)
+	metric.Timer("salzc.select_character", selectCharacter)
 }
 
 func main() {
