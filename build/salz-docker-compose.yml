@@ -13,10 +13,12 @@ services:
       - SALZWEB_URL=http://salzweb
       - SALZA_ADDR=salza:3000
       - SALZGH_ADDR=salzgh:3000
+      - SALZCHAT_ADDR=salzchat:3000
     depends_on:
       - salzweb
       - salza
       - salzgh
+      - salzchat
 
   salzweb:
     build:
@@ -42,7 +44,18 @@ services:
       - REDIS_ADDR=redis:6379
     depends_on:
       - postgres
-  
+
+  salzchat:
+    build:
+      context: ../.
+      dockerfile: build/salzchat/Dockerfile
+    command: salzchat
+    environment:
+      - ADDR=0.0.0.0:3000
+      - SALZA_ADDR=salza:3000
+    depends_on:
+      - salza
+
   salzgh:
     build:
       context: ../.
