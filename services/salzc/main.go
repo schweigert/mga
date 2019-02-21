@@ -23,6 +23,7 @@ var (
 	SalzWebCharacterPath string
 	RPCClient            *rpc.Client
 	RPCGHClient          *rpc.Client
+	RPCChatClient        *rpc.Client
 	ROI                  [100][100][]model.Character
 )
 
@@ -41,6 +42,14 @@ func initSalzWebURL() {
 	SalzWebCharacterPath = SalzWebURL + "/character/create"
 }
 
+func initRPCChat() {
+	var err error
+	RPCChatClient, err = rpc.Dial("tcp", os.Getenv("SALZCHAT_ADDR"))
+	if err != nil {
+		panic(err)
+	}
+}
+
 func init() {
 	initUsername()
 	initPassword()
@@ -54,6 +63,10 @@ func steps() {
 	metric.Timer("salzc.auth_account", AuthAccount)
 	metric.Timer("salzc.check_account", CheckAccount)
 	metric.Timer("salzc.select_character", selectCharacter)
+
+	for {
+		metric.Timer("salzc.send_chat", sendChat)
+	}
 }
 
 func main() {
