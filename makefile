@@ -43,4 +43,4 @@ rudy: down build_salz
 	docker-compose -f build/rudy-docker-compose.yml up --scale rudyc=3
 
 salz: down build_salz
-	docker-compose -f build/salz-docker-compose.yml up
+	docker-compose -f build/salz-docker-compose.yml up --scale salzc=3
