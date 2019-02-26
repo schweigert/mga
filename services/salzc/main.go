@@ -55,6 +55,7 @@ func init() {
 	initPassword()
 
 	initSalzWebURL()
+	initRPCChat()
 }
 
 func steps() {
@@ -66,6 +67,7 @@ func steps() {
 
 	for {
 		metric.Timer("salzc.send_chat", sendChat)
+		metric.Timer("salzc.receive_chat", receiveChat)
 	}
 }
 
