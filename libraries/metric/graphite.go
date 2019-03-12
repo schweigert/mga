@@ -8,7 +8,8 @@ import (
 	graphite "github.com/marpaia/graphite-golang"
 )
 
-var GRAPH_CLIENT *graphite.Graphite
+// GraphClient store a sample graphite cliente connection
+var GraphClient *graphite.Graphite
 
 func init() {
 	port, _ := strconv.Atoi(os.Getenv("GRAPHITE_PORT"))
@@ -18,5 +19,5 @@ func init() {
 		graph = graphite.NewGraphiteNop(os.Getenv("GRAPHITE_ADDR"), port)
 	}
 
-	GRAPH_CLIENT = graph
+	GraphClient = graph
 }

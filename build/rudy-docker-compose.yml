@@ -25,6 +25,8 @@ services:
       - ADDR=0.0.0.0:3000
       - RUDYDB_ADDR=http://rudydb
       - REDIS_ADDR=redis:6379
+      - GRAPHITE_PORT=2003
+      - GRAPHITE_ADDR=graphite
     depends_on:
       - redis
 

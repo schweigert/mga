@@ -13,7 +13,7 @@ func Timer(key string, f func()) {
 	f()
 
 	duration := time.Since(t)
-	err := GRAPH_CLIENT.SimpleSend(fmt.Sprintf("go.%s", key), fmt.Sprintf("%v", duration.Seconds()))
+	err := GraphClient.SimpleSend(fmt.Sprintf("go.%s", key), fmt.Sprintf("%v", duration.Seconds()))
 	if err != nil {
 		panic(err)
 	}
