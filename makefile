@@ -51,6 +51,11 @@ tag_images:
 	docker tag build_rudydb schweigert/tcc:rudydb_v003
 	docker tag build_rudygh schweigert/tcc:rudygh_v003
 	docker tag build_rudya schweigert/tcc:rudya_v003
+	docker tag build_salza schweigert/tcc:salza_v003
+	docker tag build_salzgh schweigert/tcc:salzgh_v003
+	docker tag build_salzchat schweigert/tcc:salzchat_v003
+	docker tag build_salzweb schweigert/tcc:salzweb_v003
+	docker tag build_salzc schweigert/tcc:salzc_v003
 
 docker_push: tag_images
 	docker push schweigert/tcc:rudyc_v003
@@ -59,3 +64,8 @@ docker_push: tag_images
 	docker push schweigert/tcc:rudydb_v003
 	docker push schweigert/tcc:rudygh_v003
 	docker push schweigert/tcc:rudya_v003
+	docker push schweigert/tcc:salza_v003
+	docker push schweigert/tcc:salzgh_v003
+	docker push schweigert/tcc:salzchat_v003
+	docker push schweigert/tcc:salzweb_v003
+	docker push schweigert/tcc:salzc_v003
