@@ -7,6 +7,8 @@ import (
 
 func CheckAccount() {
 	var err error
+	defer RPCClient.Close()
+
 	RPCClient, err = rpc.Dial("tcp", os.Getenv("SALZA_ADDR"))
 	if err != nil {
 		panic(err)

@@ -46,16 +46,16 @@ salz: down build_salz
 	docker-compose -f build/salz-docker-compose.yml up --scale salzc=3
 
 tag_images:
-	docker tag build_rudyc schweigert/tcc:rudyc_v001
-	docker tag build_rudyweb schweigert/tcc:rudyweb_v001
-	docker tag build_rudydb schweigert/tcc:rudydb_v001
-	docker tag build_rudygh schweigert/tcc:rudygh_v001
-	docker tag build_rudya schweigert/tcc:rudya_v001
+	docker tag build_rudyc schweigert/tcc:rudyc_v003
+	docker tag build_rudyweb schweigert/tcc:rudyweb_v003
+	docker tag build_rudydb schweigert/tcc:rudydb_v003
+	docker tag build_rudygh schweigert/tcc:rudygh_v003
+	docker tag build_rudya schweigert/tcc:rudya_v003
 
 docker_push: tag_images
-	docker push schweigert/tcc:rudyc_v001
-	docker push schweigert/tcc:rudyc_v001
-	docker push schweigert/tcc:rudyweb_v001
-	docker push schweigert/tcc:rudydb_v001
-	docker push schweigert/tcc:rudygh_v001
-	docker push schweigert/tcc:rudya_v001
+	docker push schweigert/tcc:rudyc_v003
+	docker push schweigert/tcc:rudyc_v003
+	docker push schweigert/tcc:rudyweb_v003
+	docker push schweigert/tcc:rudydb_v003
+	docker push schweigert/tcc:rudygh_v003
+	docker push schweigert/tcc:rudya_v003

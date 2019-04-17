@@ -66,6 +66,7 @@ func steps() {
 	metric.Timer("salzc.select_character", selectCharacter)
 
 	for {
+		metric.Timer("salzc.check_account", CheckAccount)
 		metric.Timer("salzc.send_chat", sendChat)
 		metric.Timer("salzc.receive_chat", receiveChat)
 	}
