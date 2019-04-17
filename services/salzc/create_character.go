@@ -7,6 +7,7 @@ import (
 
 	"github.com/parnurzeal/gorequest"
 	"github.com/schweigert/mga/libraries/randomizer"
+	"github.com/schweigert/mga/model"
 )
 
 func createCharacterRequest() (gorequest.Response, string, []error) {
@@ -27,4 +28,6 @@ func createCharacter() {
 	if resp.StatusCode != 200 {
 		panic("Status error")
 	}
+
+	UserAccount.Characters = []model.Character{UserCharacter}
 }

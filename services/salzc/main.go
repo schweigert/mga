@@ -50,12 +50,30 @@ func initRPCChat() {
 	}
 }
 
+func initRPCAuthService() {
+	var err error
+	RPCClient, err = rpc.Dial("tcp", os.Getenv("SALZA_ADDR"))
+	if err != nil {
+		panic(err)
+	}
+}
+
+func initRPCGameHandler() {
+	var err error
+	RPCGHClient, err = rpc.Dial("tcp", os.Getenv("SALZGH_ADDR"))
+	if err != nil {
+		panic(err)
+	}
+}
+
 func init() {
 	initUsername()
 	initPassword()
 
 	initSalzWebURL()
 	initRPCChat()
+	initRPCGameHandler()
+	initRPCAuthService()
 }
 
 func steps() {
@@ -69,6 +87,8 @@ func steps() {
 		metric.Timer("salzc.check_account", CheckAccount)
 		metric.Timer("salzc.send_chat", sendChat)
 		metric.Timer("salzc.receive_chat", receiveChat)
+		metric.Timer("salzc.roi", roiCharacter)
+		metric.Timer("salzc.move", moveCharacter)
 	}
 }
 
