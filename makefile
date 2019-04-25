@@ -43,29 +43,29 @@ rudy: down build_salz
 	docker-compose -f build/rudy-docker-compose.yml up --scale rudyc=3
 
 salz: down build_salz
-	docker-compose -f build/salz-docker-compose.yml up --scale salzc=3
+	docker-compose -f build/salz-docker-compose.yml up --scale salzc=10
 
 tag_images:
-	docker tag build_rudyc schweigert/tcc:rudyc_v003
-	docker tag build_rudyweb schweigert/tcc:rudyweb_v003
-	docker tag build_rudydb schweigert/tcc:rudydb_v003
-	docker tag build_rudygh schweigert/tcc:rudygh_v003
-	docker tag build_rudya schweigert/tcc:rudya_v003
-	docker tag build_salza schweigert/tcc:salza_v003
-	docker tag build_salzgh schweigert/tcc:salzgh_v003
-	docker tag build_salzchat schweigert/tcc:salzchat_v003
-	docker tag build_salzweb schweigert/tcc:salzweb_v003
-	docker tag build_salzc schweigert/tcc:salzc_v003
+	docker tag build_rudyc schweigert/tcc:rudyc_v004
+	docker tag build_rudyweb schweigert/tcc:rudyweb_v004
+	docker tag build_rudydb schweigert/tcc:rudydb_v004
+	docker tag build_rudygh schweigert/tcc:rudygh_v004
+	docker tag build_rudya schweigert/tcc:rudya_v004
+	docker tag build_salza schweigert/tcc:salza_v004
+	docker tag build_salzgh schweigert/tcc:salzgh_v004
+	docker tag build_salzchat schweigert/tcc:salzchat_v004
+	docker tag build_salzweb schweigert/tcc:salzweb_v004
+	docker tag build_salzc schweigert/tcc:salzc_v004
 
 docker_push: tag_images
-	docker push schweigert/tcc:rudyc_v003
-	docker push schweigert/tcc:rudyc_v003
-	docker push schweigert/tcc:rudyweb_v003
-	docker push schweigert/tcc:rudydb_v003
-	docker push schweigert/tcc:rudygh_v003
-	docker push schweigert/tcc:rudya_v003
-	docker push schweigert/tcc:salza_v003
-	docker push schweigert/tcc:salzgh_v003
-	docker push schweigert/tcc:salzchat_v003
-	docker push schweigert/tcc:salzweb_v003
-	docker push schweigert/tcc:salzc_v003
+	docker push schweigert/tcc:rudyc_v004
+	docker push schweigert/tcc:rudyc_v004
+	docker push schweigert/tcc:rudyweb_v004
+	docker push schweigert/tcc:rudydb_v004
+	docker push schweigert/tcc:rudygh_v004
+	docker push schweigert/tcc:rudya_v004
+	docker push schweigert/tcc:salza_v004
+	docker push schweigert/tcc:salzgh_v004
+	docker push schweigert/tcc:salzchat_v004
+	docker push schweigert/tcc:salzweb_v004
+	docker push schweigert/tcc:salzc_v004
