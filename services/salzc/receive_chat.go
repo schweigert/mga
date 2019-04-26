@@ -7,9 +7,10 @@ import (
 )
 
 func receiveChat() {
+	defer chatWaitGroup.Done()
 	chatSet := model.ChatSet{}
 
-	err := RPCChatClient.Call("Listener.ReceiveChat", UserCharacter, &chatSet)
+	err := RPCChatClientReceiver.Call("Listener.ReceiveChat", UserCharacter, &chatSet)
 	if err != nil {
 		panic(err)
 	}

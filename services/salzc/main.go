@@ -6,6 +6,7 @@ import (
 	"net/rpc"
 	"os"
 	"strconv"
+	"sync"
 	"time"
 
 	"github.com/schweigert/mga/libraries/metric"
@@ -16,15 +17,16 @@ import (
 
 // Global Client Variables
 var (
-	UserAccount          model.Account
-	UserCharacter        model.Character
-	SalzWebURL           string
-	SalzWebAccountPath   string
-	SalzWebCharacterPath string
-	RPCClient            *rpc.Client
-	RPCGHClient          *rpc.Client
-	RPCChatClient        *rpc.Client
-	ROI                  [100][100][]model.Character
+	UserAccount           model.Account
+	UserCharacter         model.Character
+	SalzWebURL            string
+	SalzWebAccountPath    string
+	SalzWebCharacterPath  string
+	RPCClient             *rpc.Client
+	RPCGHClient           *rpc.Client
+	RPCChatClientReceiver *rpc.Client
+	RPCChatClientSender   *rpc.Client
+	ROI                   [100][100][]model.Character
 )
 
 func initUsername() {
@@ -44,7 +46,12 @@ func initSalzWebURL() {
 
 func initRPCChat() {
 	var err error
-	RPCChatClient, err = rpc.Dial("tcp", os.Getenv("SALZCHAT_ADDR"))
+	RPCChatClientReceiver, err = rpc.Dial("tcp", os.Getenv("SALZCHAT_ADDR"))
+	if err != nil {
+		panic(err)
+	}
+
+	RPCChatClientSender, err = rpc.Dial("tcp", os.Getenv("SALZCHAT_ADDR"))
 	if err != nil {
 		panic(err)
 	}
@@ -76,6 +83,8 @@ func init() {
 	initRPCAuthService()
 }
 
+var chatWaitGroup sync.WaitGroup
+
 func steps() {
 	metric.Timer("salzc.create_account", createAccount)
 	metric.Timer("salzc.create_character", createCharacter)
@@ -85,10 +94,12 @@ func steps() {
 
 	for {
 		metric.Timer("salzc.check_account", CheckAccount)
-		metric.Timer("salzc.send_chat", sendChat)
-		metric.Timer("salzc.receive_chat", receiveChat)
+		chatWaitGroup.Add(2)
+		go metric.Timer("salzc.send_chat", sendChat)
+		go metric.Timer("salzc.receive_chat", receiveChat)
 		metric.Timer("salzc.roi", roiCharacter)
 		metric.Timer("salzc.move", moveCharacter)
+		chatWaitGroup.Wait()
 	}
 }
 
