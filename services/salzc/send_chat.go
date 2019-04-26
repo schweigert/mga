@@ -18,4 +18,6 @@ func sendChat() {
 	if err != nil {
 		panic(err)
 	}
+
+	log.Println("Chat submited")
 }

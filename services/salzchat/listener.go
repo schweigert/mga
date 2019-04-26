@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"log"
 
 	"github.com/schweigert/mga/model"
@@ -41,7 +42,8 @@ func (listener *Listener) ReceiveChat(character model.Character, ret *model.Chat
 	channel, ok := listener.channels[character.ID]
 
 	if !ok {
-		return nil
+		log.Println(channel, character)
+		return errors.New("Wtf?")
 	}
 
 	for {
